@@ -13,19 +13,9 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const filteredEvents = (
-    (!type
-      ? data?.events
-      : data?.events) || []
-  ).filter((event, index) => {
-    if (
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
-      return true;
-    }
-    return false;
-  });
+  const filteredEvents = (data?.events || [])
+    .filter((event) => !type || event.type === type) // Filtrage des événements selon le type sélectionné
+    .slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE); // Pagination
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
