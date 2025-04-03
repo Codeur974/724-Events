@@ -11,20 +11,22 @@ const mockContactApi = () =>
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false); // État pour gérer l'affichage du message de confirmation
-  // const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
       setSending(true);
-      setSent(false); // Réinitialiser l'état du message de confirmation
+      setSent(false);
       // We try to call mockContactApi
       try {
         await mockContactApi();
         setSending(false);
+        onSuccess();
         setSent(true);
       } catch (err) {
         setSending(false);
+
         onError(err);
       }
     },

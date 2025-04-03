@@ -32,7 +32,6 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => {
-        // Génération d'une clé unique pour chaque événement
         const eventKey = `${event.id || uuidv4()}-${event.date}-${
           event.title
         }-${idx}`;
@@ -56,14 +55,13 @@ const Slider = () => {
             <div className="SlideCard__paginationContainer">
               <div className="SlideCard__pagination">
                 {byDateDesc.map((_, radioIdx) => {
-                  // Génération de clés uniques pour les radios
                   const radioKey = `radio-${event.id || uuidv4()}-${
                     event.date
                   }-${radioIdx}`;
 
                   return (
                     <input
-                      key={radioKey} // Clé unique pour chaque radio
+                      key={radioKey}
                       type="radio"
                       name="radio-button"
                       defaultChecked={index === radioIdx}
